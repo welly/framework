@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 
-// use Framework\Core\Controller;
+use Framework\Core\BaseController;
+use Framework\Core\Template;
 
-class TestController {
+
+class TestController extends BaseController {
 
 
-  public function view()
+  public function show()
   {
-    return "This is the view function of " . __CLASS__;
+    $template = new Template();
+    $template->render('show.html.twig');
   }
 
 }

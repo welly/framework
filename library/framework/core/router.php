@@ -32,10 +32,6 @@ class Router
   {
     spl_autoload_register('framework_autoload');
 
-    // Initialising BaseController
-    $controllerName = $this->controllerName;
-    $controller = new $this->controllerName();
-
     $this->parse();
     $this->controllerName = class_exists($this->controllerName) ? $this->controllerName : 'BaseController';
 
