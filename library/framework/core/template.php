@@ -13,13 +13,13 @@ class Template
   public function __construct() {
     $this->loader = new \Twig_Loader_Filesystem(ROOT . DS . 'app/views');
     $this->twig = new \Twig_Environment($this->loader, array(
-      'cache' => ROOT . DS . 'tmp'
+      'cache' => ROOT . DS . 'tmp', 'debug' => true
     ));
   }
 
   public function render($template_name) {
-    $template = $this->twig->loadTemplate($template_name);
-    echo $template->render(array());
+    // $template = $this->twig->loadTemplate($template_name);
+    echo $this->twig->render($template_name, array('name' => 'Alastair'));
   }
 
 }
