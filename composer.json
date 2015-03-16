@@ -1,5 +1,6 @@
 {
   "require": {
+    "symfony/yaml": "3.0.*@dev",
     "twig/twig": "2.0.*@dev"
   }
 }
