@@ -2,45 +2,29 @@
 
 namespace Framework\Core;
 
+require_once ROOT . DS . 'vendor/autoload.php';
+
 use Framework\Core\Path;
+use Symfony\Component\Yaml\Yaml;
 
 class Router
 {
 
-  protected $controllerName;
-  protected $actionName;
-  protected $query;
+  private $path;
 
-  public function __construct()
+  public function __construct($path)
   {
-    $this->controllerName = 'Framework\Core\BaseController';
+    $this->path = $path;
   }
 
-  private function parse()
+  public function parse()
   {
-    $this->setController(Path::getArg(0));
-    $this->actionName = Path::getArg(1);
-    $this->query = Path::getArg(2);
-  }
-
-  private function setController($controllerName)
-  {
-    $this->controllerName = 'App\Controllers\\' . ucfirst($controllerName) . 'Controller';
-  }
-
-  public function dispatch()
-  {
-    spl_autoload_register('framework_autoload');
-
-    $this->parse();
-    $this->controllerName = class_exists($this->controllerName) ? $this->controllerName : 'BaseController';
-
-    $dispatch = new $this->controllerName();
-
-    $response = call_user_func_array(array($dispatch, $this->actionName), array());
-
-    echo $response;
-
+    $routes = Yaml::parse(file_get_contents(ROOT . DS . 'app/config/routing.yml'));
+    foreach($routes as $route)
+    {
+      print_r($route);
+      print_r($this->path);
+    }
   }
 
 }
