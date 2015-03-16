@@ -36,7 +36,7 @@ function framework_bootstrap()
    */
 
     spl_autoload_register('framework_autoload');
-    $router = new Router();
-    $router->dispatch();
+    $router = new Router(Path::getPath());
+    $router->parse();
 
 }
